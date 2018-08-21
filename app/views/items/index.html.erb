@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MovieEmpire</title>
+    <link  rel="stylesheet" type="text/css" href="style.css" >
+    <meta charset = "UTF-8" />
+  </head>
+
+
+  <div class="boxing">
+  <body>
+    <ul>
+        <li id="movies"><a href="/items">Movie</a></li>
+        <li style="float:right"><a class="active" href="/Admin">Log In</a></li>
+        <li style="float:right"><a class="active" href="/logout">Log Out</a></li>
+       <% if user_signed_in? %>
+<div>Signed in as... <%= current_user.email %>
+(<%= link_to 'Sign out', destroy_user_session_path, :method =>
+:delete%>)
+</div>
+<% else %>
+<%= link_to 'Register', new_user_registration_path %> or
+<%= link_to 'Sign in', new_user_session_path %>
+<% end %>  
+    </ul>
+   
+    <h1>MovieEmpire</h1>
+
+<table id="customers">
+  <thead>
+    <tr>
+      <th class = "imagery">Image url</th>
+      <th class = "otherone">Title</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+       <tr>
+         <td>   
+           <div class="image">
+             <%= link_to (image_tag item.image_url, :style => "height:300px"), item %>
+           </div>
+        </td>
+        <td>
+          <div class="title">
+            <%= link_to item.title, item %>
+          </div>
+          <div class="description">
+            <%=h item.description %>
+          </div>
+          <div class="genre">
+            <%=h item.genre %>
+          </div>
+          <div class="price">
+            <%= number_to_currency(item.price, :unit => "£") %>
+          </div>
+          <div class="links">
+            <% if session[:login] == 1 %>
+	    <%= link_to 'Edit', edit_item_path(item) %> |
+            <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %>
+            <% else %>
+            <a href="/cart/<%= item.id %>">Add to Cart</a><br><br>
+	   <% end %>
+        </div>
+        </td>
+        <% end %>
+	</tr>
+  </tbody>
+</table>
+
+<br>
+ 
+ <% if session[:login] == 1 %>
+ <p><%= link_to 'New Item', new_item_path %></p>
+ <% end %>
+
+    <div id='footer'>
+      <h6 class="footertext">&copy; MovieEmpire &trade; 2017</h6>
+    </div>
+  </body>
+</div>
+
+</html>
+

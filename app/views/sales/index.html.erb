@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MovieEmpire</title>
+    <link  rel="stylesheet" type="text/css" href="style.css" >
+    <meta charset = "UTF-8" />
+  </head>
+
+
+  <div class="boxing">
+  <body>
+    <ul>
+        <li><a href="/items">Movie</a></li>
+        <li><a href="/sales">Sales</a></li>
+        <li style="float:right"><a class="active" href="/Admin">Log In</a></li>
+        <li style="float:right"><a class="active" href="/logout">Log Out</a></li>
+       <% if user_signed_in? %>
+<div>Signed in as... <%= current_user.email %>
+(<%= link_to 'Sign out', destroy_user_session_path, :method =>
+:delete%>)
+</div>
+<% else %>
+<%= link_to 'Register', new_user_registration_path %> or
+<%= link_to 'Sign in', new_user_session_path %>
+<% end %>  
+    </ul>
+   
+    <h1>MovieEmpire</h1>
+
+<table id="customers">
+  <thead>
+    <tr>
+      <th>Image url</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |sale| %>
+       <tr>
+         <td>   
+           <div class="image">
+             <%= link_to (image_tag item.image_url, :style => "height:100px"), item %>
+           </div>
+        </td>
+        <td>
+          <div class="title">
+            <%= link_to item.title, item %>
+          </div>
+          <div class="description">
+            <%=h item.description %>
+          </div>
+          <div class="genre">
+            <%=h item.genre %>
+          </div>
+          <div class="price">
+            <%= number_to_currency(item.price, :unit => "£;") %>
+          </div>
+          <div class="links">
+            <% if session[:login] == 1 %>
+	    <%= link_to 'Edit', edit_item_path(item) %> |
+            <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %>
+            <% else %>
+            <a href="/cart/<%= item.id %>">Add to Cart</a><br><br>
+	   <% end %>
+        </div>
+        </td>
+        <% end %>
+	</tr>
+  </tbody>
+</table>
+
+<br>
+ 
+ <% if session[:login] == 1 %>
+ <p><%= link_to 'New Item', new_item_path %></p>
+ <% end %>
+
+ <p id="notice"><%= notice %></p>
+
+    <div id='footer'>
+      <h6 class="footertext">&copy; MovieEmpire &trade; 2017</h6>
+    </div>
+  </body>
+</div>
+
+</html>
+
+
+
+<p id="notice"><%= notice %></p>

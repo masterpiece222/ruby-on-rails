@@ -1,0 +1,77 @@
+.movies {
+ color: white;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: grey;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    background-color:grey;
+}
+
+li a:hover:not(.active) {
+    background-color: #CC0000;
+}
+
+.active {
+    background-color: #0B5394;
+}
+
+
+h1 {
+   text-align: center;
+   border: 1px solid grey;
+   margin-top:0px;
+   background-color: white;
+   padding: 70px;
+   color: red;
+   font-size: 60px;
+
+}
+
+.boxing {
+  background-color: #EEEEEE;
+}
+
+
+
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 1px;
+    width: 1%;
+}
+
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+// Place all the styles related to the Movies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
